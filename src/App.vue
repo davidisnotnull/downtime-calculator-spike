@@ -220,7 +220,7 @@
                 class="form-control"
                 id="numberOfEmployees"
                 placeholder=""
-                min="0"
+                min="1"
                 v-model="numberOfEmployees"
               />
               <span class="input-group-text">people</span>
@@ -239,7 +239,7 @@
                 class="form-control"
                 id="averageSalary"
                 placeholder=""
-                min="0"
+                min="1"
                 v-model="averageSalaryPerEmployee"
               />
             </div>
@@ -257,7 +257,7 @@
                 class="form-control"
                 id="averageOverhead"
                 placeholder=""
-                min="0"
+                min="1"
                 v-model="averageOverheadPerEmployee"
               />
             </div>
@@ -275,7 +275,7 @@
                 class="form-control"
                 id="annualRevenue"
                 placeholder=""
-                min="0"
+                min="1"
                 v-model="annualRevenue"
               />
             </div>
@@ -342,7 +342,12 @@
         </section>
       </div>
       <div class="col-12 col-md-6">
-        <h2>MSP Solution</h2>
+        <section class="proposal">
+          <header>
+            MSP Solution
+          </header>
+        </section>
+        
       </div>
     </div>
   </div>
@@ -511,6 +516,14 @@ section.results header {
   background-color: #dddddd;
   font-size: 26px;
   color: #4d5967;
+}
+
+section.proposal header {
+  margin: 0 0 20px 0;
+  padding: 10px 20px;
+  background-color: #199ed9;
+  font-size: 26px;
+  color: #ffffff;
 }
 
 section.results h3.resultHeading {
