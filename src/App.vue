@@ -73,7 +73,7 @@
             </div>
           </div>
         </div>
-        <div v-if="!noBackup" >
+        <div v-if="!noBackup">
           <div class="mb-3 row">
             <label for="responseLeadTimeHrs" class="col-sm-9 col-form-label">On average how long does it take your
               client to notify you of an
@@ -154,7 +154,7 @@
             employee?</label>
           <div class="col-sm-3">
             <div class="input-group">
-              <span class="input-group-text">£</span>
+              <span class="input-group-text">{{ currencySymbol }}</span>
               <input type="number" class="form-control" id="averageSalary" placeholder="" min="1"
                 v-model="averageSalaryPerEmployee" />
             </div>
@@ -165,7 +165,7 @@
             employee?</label>
           <div class="col-sm-3">
             <div class="input-group">
-              <span class="input-group-text">£</span>
+              <span class="input-group-text">{{ currencySymbol }}</span>
               <input type="number" class="form-control" id="averageOverhead" placeholder="" min="1"
                 v-model="averageOverheadPerEmployee" />
             </div>
@@ -175,7 +175,7 @@
           <label for="annualRevenue" class="col-sm-9 col-form-label">What is your business's annual revenue?</label>
           <div class="col-sm-3">
             <div class="input-group">
-              <span class="input-group-text">£</span>
+              <span class="input-group-text">{{ currencySymbol }}</span>
               <input type="number" class="form-control" id="annualRevenue" placeholder="" min="1"
                 v-model="annualRevenue" />
             </div>
@@ -192,52 +192,54 @@
       <div class="col-12 col-md-6 g-0">
         <section class="results">
           <header>Current Solution</header>
-          <div class="mb-3">
-            <h3 class="resultHeading">Time between backups</h3>
-            <p v-if="!noBackup" class="result">{{ backupHrs }}hrs {{ backupMins }}mins</p>
-            <p v-if="noBackup" class="result">No Backup Taken</p>
-          </div>
-          <div class="mb-3">
-            <h3 class="resultHeading">Recovery Processing Time</h3>
-            <p v-if="!noBackup" class="result">{{ recoveryProcessingTime }}</p>
-            <p v-if="noBackup" class="result">No Backup Taken</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="resultHeading">Estimated Risk</h3>
-            <div :class="riskClass" role="alert">{{ calculatedRisk }}</div>
-          </div>
-          <div class="mb-3">
-            <h3 class="summaryHeading">Summary</h3>
-            <hr />
-            <div v-if="!noBackup" class="mb-3">
-              <h3 class="resultHeading">Lead Time Cost</h3>
-              <p class="result">
-                {{ currencySymbol }}{{ leadTimeCost }}
-                <span>(provided as {{ leadTimeHrs }}hrs
-                  {{ leadTimeMins }}mins)</span>
-              </p>
-            </div>
-            <div v-if="!noBackup" class="mb-3">
-              <h3 class="resultHeading">Recovery Time Cost</h3>
-              <p class="result">
-                {{ currencySymbol }}{{ recoveryTimeCost }}
-                <span>(calculated at {{ recoveryProcessingTime }})</span>
-              </p>
+          <div class="main">
+            <div class="mb-3">
+              <h3 class="resultHeading">Time between backups</h3>
+              <p v-if="!noBackup" class="result">{{ backupHrs }}hrs {{ backupMins }}mins</p>
+              <p v-if="noBackup" class="result">No Backup Taken</p>
             </div>
             <div class="mb-3">
-              <h3 class="resultHeading">Total Downtime Cost</h3>
-              <p v-if="!noBackup" class="result">
-                {{ currencySymbol }}{{ totalDowntimeCost }}
-                <span>(calculated at {{ totalDowntime }})</span>
-              </p>
-              <p v-if="noBackup" class="result">
-                Possible Business Closure
-              </p>
+              <h3 class="resultHeading">Recovery Processing Time</h3>
+              <p v-if="!noBackup" class="result">{{ recoveryProcessingTime }}</p>
+              <p v-if="noBackup" class="result">No Backup Taken</p>
+            </div>
+            <div class="mb-4">
+              <h3 class="resultHeading">Estimated Risk</h3>
+              <div :class="riskClass" role="alert">{{ calculatedRisk }}</div>
             </div>
             <div class="mb-3">
-              <span class="small">*all losses are merely an estimation of losses associated with
-                technology, and does not reflect a calculation of actual losses
-                to your business.</span>
+              <h3 class="summaryHeading">Summary</h3>
+              <hr />
+              <div v-if="!noBackup" class="mb-3">
+                <h3 class="resultHeading">Lead Time Cost</h3>
+                <p class="result">
+                  {{ currencySymbol }}{{ leadTimeCost }}
+                  <span>(provided as {{ leadTimeHrs }}hrs
+                    {{ leadTimeMins }}mins)</span>
+                </p>
+              </div>
+              <div v-if="!noBackup" class="mb-3">
+                <h3 class="resultHeading">Recovery Time Cost</h3>
+                <p class="result">
+                  {{ currencySymbol }}{{ recoveryTimeCost }}
+                  <span>(calculated at {{ recoveryProcessingTime }})</span>
+                </p>
+              </div>
+              <div class="mb-3">
+                <h3 class="resultHeading">Total Downtime Cost</h3>
+                <p v-if="!noBackup" class="result">
+                  {{ currencySymbol }}{{ totalDowntimeCost }}
+                  <span>(calculated at {{ totalDowntime }})</span>
+                </p>
+                <p v-if="noBackup" class="result">
+                  Possible Business Closure
+                </p>
+              </div>
+              <div class="mb-3">
+                <span class="small">*all losses are merely an estimation of losses associated with
+                  technology, and does not reflect a calculation of actual losses
+                  to your business.</span>
+              </div>
             </div>
           </div>
         </section>
@@ -247,6 +249,21 @@
           <header>
             MSP Solution
           </header>
+          <div class="main">
+            <div class="mb-3">
+              <h3 class="resultHeading">Time between backups</h3>
+              <p class="result">{{ msp.timeBetweenBackups }} mins</p>
+            </div>
+            <div class="mb-3">
+              <h3 class="resultHeading">Average Recovery Processing Time</h3>
+              <p class="result">{{ msp.recoveryProcessingTime }} mins*</p>
+              <span class="small">
+                *Time to virtualization will vary depending on numerous factors including, but not limited to, the size
+                of the SIRIS device, the availability and speeds of other local resources, the number of applications
+                you are running, and server load.
+              </span>
+            </div>
+          </div>
         </section>
 
       </div>
@@ -278,6 +295,10 @@ export default {
       recoveryTime: 0,
       riskClass: "alert alert-danger",
       currencySymbol: "£",
+      msp: {
+        timeBetweenBackups: 5,
+        recoveryProcessingTime: 6,
+      }
     };
   },
   setup() { },
@@ -411,6 +432,11 @@ export default {
 </script>
 
 <style scoped>
+section.results .main,
+section.proposal .main {
+  padding: 0 20px;
+}
+
 section.results header {
   margin: 0 0 20px 0;
   padding: 10px 20px;
@@ -427,14 +453,16 @@ section.proposal header {
   color: #ffffff;
 }
 
-section.results h3.resultHeading {
+section.results h3.resultHeading,
+section.proposal h3.resultHeading {
   color: #9ba7b5;
   font-size: 18px;
   font-weight: 400;
   margin: 0;
 }
 
-section.results h3.summaryHeading {
+section.results h3.summaryHeading,
+section.proposal h3.summaryHeading {
   color: #333333;
   font-size: 18px;
   font-weight: 400;
@@ -442,12 +470,14 @@ section.results h3.summaryHeading {
   padding: 0;
 }
 
-section.results p.result {
+section.results p.result,
+section.proposal p.result {
   font-size: 24px;
   color: #4d5967;
 }
 
-section.results p.result span {
+section.results p.result span,
+section.proposal p.result span {
   font-size: 16px;
 }
 </style>
