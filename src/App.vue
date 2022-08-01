@@ -263,6 +263,32 @@
                 you are running, and server load.
               </span>
             </div>
+            <div class="mb-3">
+              <h3 class="summaryHeading">Summary</h3>
+              <hr />
+            </div>
+            <div class="mb-3">
+              <h3 class="resultHeading">Lead Time Cost</h3>
+              <p class="result">
+                {{ currencySymbol }}{{ leadTimeCost }}
+                <span>(provided as {{ leadTimeHrs }}hrs
+                  {{ leadTimeMins }}mins)</span>
+              </p>
+            </div>
+            <div class="mb-3">
+              <h3 class="resultHeading">Recovery Time Cost</h3>
+              <p class="result">
+                {{ currencySymbol }}{{ mspRecoveryCost }}
+                <span>(calculated at {{ msp.recoveryProcessingTime }} mins)</span>
+              </p>
+            </div>
+            <div class="mb-3">
+                <h3 class="resultHeading">Total Downtime Cost</h3>
+                <p class="result">
+                  {{ currencySymbol }}{{ mspDowntimeCost }}
+                  <span>(calculated at {{ mspDowntime }})</span>
+                </p>
+              </div>
           </div>
         </section>
 
@@ -327,6 +353,18 @@ export default {
       let totalDowntime = this.getTotalRecoveryTime();
       return this.parseUserFriendlyTime(totalDowntime);
     },
+    mspRecoveryCost() {
+      let mspRecovery = this.getMSPRecoveryCost();
+      return this.parseUserFriendlyCurrency(mspRecovery);
+    },
+    mspDowntimeCost() {
+      let totalDowntimeCost = this.getMSPDowntimeCost();
+      return this.parseUserFriendlyCurrency(totalDowntimeCost);
+    },
+    mspDowntime() {
+      let totalMspDowntime = this.getMSPDowntime();
+      return this.parseUserFriendlyTime(totalMspDowntime);
+    }
   },
   methods: {
     setCloudBackup() {
@@ -410,6 +448,26 @@ export default {
 
       return this.parseCurrencyForCalculation(downtimeCost);
     },
+    getMSPRecoveryCost() {
+      let mspRecoveryTime = parseFloat(this.msp.recoveryProcessingTime / 60);
+      let recoveryTimeCost = parseFloat(this.downtimeRevenueCostPerHour());
+
+      let mspRecoveryCost = mspRecoveryTime * recoveryTimeCost;
+      return this.parseCurrencyForCalculation(mspRecoveryCost);
+    },
+    getMSPDowntimeCost() {
+      let mspRecoveryCost = parseFloat(this.getMSPRecoveryCost());
+      let leadTimeCost = parseFloat(this.getLeadTimeCost());
+      let downtimeCost = leadTimeCost + mspRecoveryCost;
+
+      return this.parseCurrencyForCalculation(downtimeCost);
+    },
+    getMSPDowntime() {
+      let mspRecoveryTime = parseFloat(this.msp.recoveryProcessingTime);
+      let leadTime = parseFloat((this.leadTimeHrs * 60) + this.leadTimeMins);
+      let mspDowntime = mspRecoveryTime + leadTime;
+      return mspDowntime;      
+    },
     parseUserFriendlyTime(timeToParse) {
       let hours = timeToParse / 60;
       let floorHours = Math.floor(hours);
@@ -479,5 +537,9 @@ section.proposal p.result {
 section.results p.result span,
 section.proposal p.result span {
   font-size: 16px;
+}
+
+.small {
+  color: #9ba7b5;
 }
 </style>
