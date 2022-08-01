@@ -9,102 +9,63 @@
     <div class="row">
       <div class="col-12">
         <div class="mb-3 row">
-          <label for="businessSurvive" class="col-sm-9 col-form-label"
-            >How long can your business survive without access to your IT
-            systems?</label
-          >
+          <label for="businessSurvive" class="col-sm-9 col-form-label">How long can your business survive without access
+            to your IT
+            systems?</label>
           <div class="col-sm-3">
             <div class="input-group">
-              <input
-                type="number"
-                class="form-control"
-                id="businessSurvive"
-                placeholder=""
-                v-model="survivalTime"
-              />
+              <input type="number" class="form-control" id="businessSurvive" placeholder="" v-model="survivalTime" />
               <span class="input-group-text">hrs</span>
             </div>
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="acceptableHoursToLose" class="col-sm-9 col-form-label"
-            >How many hours of work are you willing to lose / repeat?</label
-          >
+          <label for="acceptableHoursToLose" class="col-sm-9 col-form-label">How many hours of work are you willing to
+            lose / repeat?</label>
           <div class="col-sm-3">
             <div class="input-group">
-              <input
-                type="number"
-                class="form-control"
-                id="acceptableHoursToLose"
-                placeholder=""
-                v-model="permissibleHoursLost"
-              />
+              <input type="number" class="form-control" id="acceptableHoursToLose" placeholder=""
+                v-model="permissibleHoursLost" />
               <span class="input-group-text">hrs</span>
             </div>
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="dataOnCriticalSystems" class="col-sm-9 col-form-label"
-            >How much data do you have on critical business systems?</label
-          >
+          <label for="dataOnCriticalSystems" class="col-sm-9 col-form-label">How much data do you have on critical
+            business systems?</label>
           <div class="col-sm-3">
             <div class="input-group">
-              <input
-                type="number"
-                class="form-control"
-                id="dataOnCriticalSystems"
-                placeholder=""
-                v-model="criticalSystemData"
-              />
+              <input type="number" class="form-control" id="dataOnCriticalSystems" placeholder=""
+                v-model="criticalSystemData" />
               <span class="input-group-text">Gb</span>
             </div>
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="backupFrequency" class="col-sm-9 col-form-label"
-            >How often do you back up this data?</label
-          >
+          <label for="backupFrequency" class="col-sm-9 col-form-label">How often do you back up this data?</label>
           <div class="col-sm-3">
             <div class="input-group">
               <div class="row mb-3">
                 <div class="col-6">
                   <div class="input-group">
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="backupFrequencyHrs"
-                      placeholder=""
-                      min="0"
-                      v-model="backupHrs"
-                    />
+                    <input type="number" class="form-control" id="backupFrequencyHrs" placeholder="" min="0"
+                      v-model="backupHrs" />
                     <span class="input-group-text">hrs</span>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="input-group">
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="backupFrequencyMins"
-                      placeholder=""
-                      min="0"
-                      max="45"
-                      step="15"
-                      v-model="backupMins"
-                    />
+                    <input type="number" class="form-control" id="backupFrequencyMins" placeholder="" min="0" max="45"
+                      step="15" v-model="backupMins" />
                     <span class="input-group-text">mins</span>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-12 text-center">
-                  <button
-                    @click="noBackupSelected()"
-                    type="button"
-                    :class="[
-                      noBackup ? 'btn btn-primary active' : 'btn btn-primary',
-                    ]"
-                  >
+                  <button @click="noBackupSelected()" type="button" :class="[
+                    noBackup ? 'btn btn-primary active' : 'btn btn-primary',
+                  ]">
                     I don't currently backup my data
                   </button>
                 </div>
@@ -112,89 +73,58 @@
             </div>
           </div>
         </div>
-        <div class="mb-3 row">
-          <label for="responseLeadTimeHrs" class="col-sm-9 col-form-label"
-            >On average how long does it take your client to notify you of an
-            issue and for you to start trouble shooting the downtime
-            incident?</label
-          >
-          <div class="col-sm-3">
-            <div class="row mb-3">
-              <div class="col-6">
-                <div class="input-group">
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="responseLeadTimeHrs"
-                    placeholder=""
-                    min="0"
-                    v-model="leadTimeHrs"
-                  />
-                  <span class="input-group-text">hrs</span>
+        <div v-if="!noBackup" >
+          <div class="mb-3 row">
+            <label for="responseLeadTimeHrs" class="col-sm-9 col-form-label">On average how long does it take your
+              client to notify you of an
+              issue and for you to start trouble shooting the downtime
+              incident?</label>
+            <div class="col-sm-3">
+              <div class="row mb-3">
+                <div class="col-6">
+                  <div class="input-group">
+                    <input type="number" class="form-control" id="responseLeadTimeHrs" placeholder="" min="0"
+                      v-model="leadTimeHrs" />
+                    <span class="input-group-text">hrs</span>
+                  </div>
                 </div>
-              </div>
-              <div class="col-6">
-                <div class="input-group">
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="responseLeadTimeMins"
-                    placeholder=""
-                    min="0"
-                    max="45"
-                    step="15"
-                    v-model="leadTimeMins"
-                  />
-                  <span class="input-group-text">mins</span>
+                <div class="col-6">
+                  <div class="input-group">
+                    <input type="number" class="form-control" id="responseLeadTimeMins" placeholder="" min="0" max="45"
+                      step="15" v-model="leadTimeMins" />
+                    <span class="input-group-text">mins</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="mb-3 row">
-          <label for="backupLocation" class="col-sm-9 col-form-label"
-            >Where do you currently store your backups?</label
-          >
-          <div class="col-sm-3">
-            <div class="btn-group">
-              <button
-                @click="setLocalBackup()"
-                type="button"
-                id="localBackup"
-                :class="[
+          <div class="mb-3 row">
+            <label for="backupLocation" class="col-sm-9 col-form-label">Where do you currently store your
+              backups?</label>
+            <div class="col-sm-3">
+              <div class="btn-group">
+                <button @click="setLocalBackup()" type="button" id="localBackup" :class="[
                   cloudBackup ? 'btn btn-primary' : 'btn btn-primary active',
-                ]"
-              >
-                Local
-              </button>
-              <button
-                @click="setCloudBackup()"
-                type="button"
-                id="cloudBackup"
-                :class="[
+                ]">
+                  Local
+                </button>
+                <button @click="setCloudBackup()" type="button" id="cloudBackup" :class="[
                   cloudBackup ? 'btn btn-primary active' : 'btn btn-primary',
-                ]"
-              >
-                Cloud
-              </button>
+                ]">
+                  Cloud
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div v-if="cloudBackup" class="mb-3 row">
-          <label for="cloudRecoveryDataRate" class="col-sm-9 col-form-label"
-            >What is the download speed from your cloud backup location?</label
-          >
-          <div class="col-sm-3">
-            <div class="input-group">
-              <input
-                type="number"
-                class="form-control"
-                id="cloudRecoveryDataRate"
-                placeholder=""
-                min="0"
-                v-model="cloudTransferSpeed"
-              />
-              <span class="input-group-text">Mbps</span>
+          <div v-if="cloudBackup" class="mb-3 row">
+            <label for="cloudRecoveryDataRate" class="col-sm-9 col-form-label">What is the download speed from your
+              cloud backup location?</label>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <input type="number" class="form-control" id="cloudRecoveryDataRate" placeholder="" min="0"
+                  v-model="cloudTransferSpeed" />
+                <span class="input-group-text">Mbps</span>
+              </div>
             </div>
           </div>
         </div>
@@ -210,74 +140,44 @@
     <div class="row">
       <div class="col-12">
         <div class="mb-3 row">
-          <label for="numberOfEmployees" class="col-sm-9 col-form-label"
-            >How many employees do you have?</label
-          >
+          <label for="numberOfEmployees" class="col-sm-9 col-form-label">How many employees do you have?</label>
           <div class="col-sm-3">
             <div class="input-group">
-              <input
-                type="number"
-                class="form-control"
-                id="numberOfEmployees"
-                placeholder=""
-                min="1"
-                v-model="numberOfEmployees"
-              />
+              <input type="number" class="form-control" id="numberOfEmployees" placeholder="" min="1"
+                v-model="numberOfEmployees" />
               <span class="input-group-text">people</span>
             </div>
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="averageSalary" class="col-sm-9 col-form-label"
-            >What is their average annual salary per employee?</label
-          >
+          <label for="averageSalary" class="col-sm-9 col-form-label">What is their average annual salary per
+            employee?</label>
           <div class="col-sm-3">
             <div class="input-group">
               <span class="input-group-text">£</span>
-              <input
-                type="number"
-                class="form-control"
-                id="averageSalary"
-                placeholder=""
-                min="1"
-                v-model="averageSalaryPerEmployee"
-              />
+              <input type="number" class="form-control" id="averageSalary" placeholder="" min="1"
+                v-model="averageSalaryPerEmployee" />
             </div>
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="averageOverhead" class="col-sm-9 col-form-label"
-            >What is the average annual overhead cost of an employee?</label
-          >
+          <label for="averageOverhead" class="col-sm-9 col-form-label">What is the average annual overhead cost of an
+            employee?</label>
           <div class="col-sm-3">
             <div class="input-group">
               <span class="input-group-text">£</span>
-              <input
-                type="number"
-                class="form-control"
-                id="averageOverhead"
-                placeholder=""
-                min="1"
-                v-model="averageOverheadPerEmployee"
-              />
+              <input type="number" class="form-control" id="averageOverhead" placeholder="" min="1"
+                v-model="averageOverheadPerEmployee" />
             </div>
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="annualRevenue" class="col-sm-9 col-form-label"
-            >What is your business's annual revenue?</label
-          >
+          <label for="annualRevenue" class="col-sm-9 col-form-label">What is your business's annual revenue?</label>
           <div class="col-sm-3">
             <div class="input-group">
               <span class="input-group-text">£</span>
-              <input
-                type="number"
-                class="form-control"
-                id="annualRevenue"
-                placeholder=""
-                min="1"
-                v-model="annualRevenue"
-              />
+              <input type="number" class="form-control" id="annualRevenue" placeholder="" min="1"
+                v-model="annualRevenue" />
             </div>
           </div>
         </div>
@@ -289,16 +189,18 @@
     </div>
 
     <div class="row">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 g-0">
         <section class="results">
           <header>Current Solution</header>
           <div class="mb-3">
             <h3 class="resultHeading">Time between backups</h3>
-            <p class="result">{{ backupHrs }}hrs {{ backupMins }}mins</p>
+            <p v-if="!noBackup" class="result">{{ backupHrs }}hrs {{ backupMins }}mins</p>
+            <p v-if="noBackup" class="result">No Backup Taken</p>
           </div>
           <div class="mb-3">
             <h3 class="resultHeading">Recovery Processing Time</h3>
-            <p class="result">{{ recoveryProcessingTime }}</p>
+            <p v-if="!noBackup" class="result">{{ recoveryProcessingTime }}</p>
+            <p v-if="noBackup" class="result">No Backup Taken</p>
           </div>
           <div class="mb-4">
             <h3 class="resultHeading">Estimated Risk</h3>
@@ -307,17 +209,15 @@
           <div class="mb-3">
             <h3 class="summaryHeading">Summary</h3>
             <hr />
-            <div class="mb-3">
+            <div v-if="!noBackup" class="mb-3">
               <h3 class="resultHeading">Lead Time Cost</h3>
               <p class="result">
                 {{ currencySymbol }}{{ leadTimeCost }}
-                <span
-                  >(provided as {{ leadTimeHrs }}hrs
-                  {{ leadTimeMins }}mins)</span
-                >
+                <span>(provided as {{ leadTimeHrs }}hrs
+                  {{ leadTimeMins }}mins)</span>
               </p>
             </div>
-            <div class="mb-3">
+            <div v-if="!noBackup" class="mb-3">
               <h3 class="resultHeading">Recovery Time Cost</h3>
               <p class="result">
                 {{ currencySymbol }}{{ recoveryTimeCost }}
@@ -326,28 +226,29 @@
             </div>
             <div class="mb-3">
               <h3 class="resultHeading">Total Downtime Cost</h3>
-              <p class="result">
+              <p v-if="!noBackup" class="result">
                 {{ currencySymbol }}{{ totalDowntimeCost }}
                 <span>(calculated at {{ totalDowntime }})</span>
               </p>
+              <p v-if="noBackup" class="result">
+                Possible Business Closure
+              </p>
             </div>
             <div class="mb-3">
-              <span class="small"
-                >*all losses are merely an estimation of losses associated with
+              <span class="small">*all losses are merely an estimation of losses associated with
                 technology, and does not reflect a calculation of actual losses
-                to your business.</span
-              >
+                to your business.</span>
             </div>
           </div>
         </section>
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 g-0">
         <section class="proposal">
           <header>
             MSP Solution
           </header>
         </section>
-        
+
       </div>
     </div>
   </div>
@@ -379,8 +280,8 @@ export default {
       currencySymbol: "£",
     };
   },
-  setup() {},
-  created() {},
+  setup() { },
+  created() { },
   computed: {
     recoveryProcessingTime() {
       let processingTime = this.calculateRecoveryTime();
