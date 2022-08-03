@@ -9,7 +9,8 @@
     <div class="row">
       <div class="col-12">
         <div class="mb-3 row">
-          <label for="businessSurvive" class="col-sm-9 col-form-label">How long can your business survive without access
+          
+          <label for="businessSurvive" class="col-sm-9 col-form-label"><Tooltip :tooltipText="tooltips.one" :position="'right'">?</Tooltip>How long can your business survive without access
             to your IT
             systems?</label>
           <div class="col-sm-3">
@@ -298,8 +299,13 @@
 </template>
 
 <script>
+import Tooltip from "./components/Tooltip.vue";
+
 export default {
   name: "App",
+  components: {
+    Tooltip,
+  },
   data() {
     return {
       cloudBackup: false,
@@ -324,6 +330,9 @@ export default {
       msp: {
         timeBetweenBackups: 5,
         recoveryProcessingTime: 6,
+      },
+      tooltips: {
+        one: "Systems include, but are not limited to, email, documents, specific business systems (e.g., point of sale, shipping & logistics,databases), etc.?"
       }
     };
   },
