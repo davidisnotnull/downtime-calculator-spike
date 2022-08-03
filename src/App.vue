@@ -2,6 +2,14 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col-12">
+        <h1>{{ content.mainTitle }}</h1>
+        <p>
+          {{ content.introText }}
+        </p>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
         <h2>Recovery & Data Storage</h2>
         <hr />
       </div>
@@ -9,9 +17,13 @@
     <div class="row">
       <div class="col-12">
         <div class="mb-3 row">
-          <label for="businessSurvive" class="col-sm-9 col-form-label">How long can your business survive without access
+
+          <label for="businessSurvive" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.one" :position="'right'" class="icon">?</Tooltip>How long can your business
+            survive without access
             to your IT
-            systems?</label>
+            systems?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <input type="number" class="form-control" id="businessSurvive" placeholder="" v-model="survivalTime" />
@@ -20,8 +32,11 @@
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="acceptableHoursToLose" class="col-sm-9 col-form-label">How many hours of work are you willing to
-            lose / repeat?</label>
+          <label for="acceptableHoursToLose" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.two" :position="'right'" class="icon">?</Tooltip>How many hours of work are
+            you willing to
+            lose / repeat?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <input type="number" class="form-control" id="acceptableHoursToLose" placeholder=""
@@ -31,8 +46,11 @@
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="dataOnCriticalSystems" class="col-sm-9 col-form-label">How much data do you have on critical
-            business systems?</label>
+          <label for="dataOnCriticalSystems" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.three" :position="'right'" class="icon">?</Tooltip>How much data do you have
+            on critical
+            business systems?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <input type="number" class="form-control" id="dataOnCriticalSystems" placeholder=""
@@ -42,7 +60,10 @@
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="backupFrequency" class="col-sm-9 col-form-label">How often do you back up this data?</label>
+          <label for="backupFrequency" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.four" :position="'right'" class="icon">?</Tooltip>How often do you back up
+            this data?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <div class="row mb-3">
@@ -75,10 +96,13 @@
         </div>
         <div v-if="!noBackup">
           <div class="mb-3 row">
-            <label for="responseLeadTimeHrs" class="col-sm-9 col-form-label">On average how long does it take your
+            <label for="responseLeadTimeHrs" class="col-sm-9 col-form-label">
+              <Tooltip :tooltipText="tooltips.five" :position="'right'" class="icon">?</Tooltip>On average how long does
+              it take your
               client to notify you of an
               issue and for you to start trouble shooting the downtime
-              incident?</label>
+              incident?
+            </label>
             <div class="col-sm-3">
               <div class="row mb-3">
                 <div class="col-6">
@@ -99,8 +123,11 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="backupLocation" class="col-sm-9 col-form-label">Where do you currently store your
-              backups?</label>
+            <label for="backupLocation" class="col-sm-9 col-form-label">
+              <Tooltip :tooltipText="tooltips.six" :position="'right'" class="icon">?</Tooltip>Where do you currently
+              store your
+              backups?
+            </label>
             <div class="col-sm-3">
               <div class="btn-group">
                 <button @click="setLocalBackup()" type="button" id="localBackup" :class="[
@@ -117,8 +144,11 @@
             </div>
           </div>
           <div v-if="cloudBackup" class="mb-3 row">
-            <label for="cloudRecoveryDataRate" class="col-sm-9 col-form-label">What is the download speed from your
-              cloud backup location?</label>
+            <label for="cloudRecoveryDataRate" class="col-sm-9 col-form-label">
+              <Tooltip :tooltipText="tooltips.seven" :position="'right'" class="icon">?</Tooltip>What is the download
+              speed from your
+              cloud backup location?
+            </label>
             <div class="col-sm-3">
               <div class="input-group">
                 <input type="number" class="form-control" id="cloudRecoveryDataRate" placeholder="" min="0"
@@ -140,7 +170,10 @@
     <div class="row">
       <div class="col-12">
         <div class="mb-3 row">
-          <label for="numberOfEmployees" class="col-sm-9 col-form-label">How many employees do you have?</label>
+          <label for="numberOfEmployees" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.eight" :position="'right'" class="icon">?</Tooltip>How many employees do you
+            have?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <input type="number" class="form-control" id="numberOfEmployees" placeholder="" min="1"
@@ -150,8 +183,11 @@
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="averageSalary" class="col-sm-9 col-form-label">What is their average annual salary per
-            employee?</label>
+          <label for="averageSalary" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.nine" :position="'right'" class="icon">?</Tooltip>What is their average
+            annual salary per
+            employee?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <span class="input-group-text">{{ currencySymbol }}</span>
@@ -161,8 +197,11 @@
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="averageOverhead" class="col-sm-9 col-form-label">What is the average annual overhead cost of an
-            employee?</label>
+          <label for="averageOverhead" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.ten" :position="'right'" class="icon">?</Tooltip>What is the average annual
+            overhead cost of an
+            employee?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <span class="input-group-text">{{ currencySymbol }}</span>
@@ -172,7 +211,10 @@
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="annualRevenue" class="col-sm-9 col-form-label">What is your business's annual revenue?</label>
+          <label for="annualRevenue" class="col-sm-9 col-form-label">
+            <Tooltip :tooltipText="tooltips.eleven" :position="'right'" class="icon">?</Tooltip>What is your business's
+            annual revenue?
+          </label>
           <div class="col-sm-3">
             <div class="input-group">
               <span class="input-group-text">{{ currencySymbol }}</span>
@@ -283,12 +325,12 @@
               </p>
             </div>
             <div class="mb-3">
-                <h3 class="resultHeading">Total Downtime Cost</h3>
-                <p class="result">
-                  {{ currencySymbol }}{{ mspDowntimeCost }}
-                  <span>(calculated at {{ mspDowntime }})</span>
-                </p>
-              </div>
+              <h3 class="resultHeading">Total Downtime Cost</h3>
+              <p class="result">
+                {{ currencySymbol }}{{ mspDowntimeCost }}
+                <span>(calculated at {{ mspDowntime }})</span>
+              </p>
+            </div>
           </div>
         </section>
 
@@ -298,8 +340,13 @@
 </template>
 
 <script>
+import Tooltip from "./components/Tooltip.vue";
+
 export default {
   name: "App",
+  components: {
+    Tooltip,
+  },
   data() {
     return {
       cloudBackup: false,
@@ -321,9 +368,26 @@ export default {
       recoveryTime: 0,
       riskClass: "alert alert-danger",
       currencySymbol: "£",
+      content: {
+        mainTitle: "Recovery Time & Downtime Cost Calculator",
+        introText: "The cost of a technology outage can cripple a business. Use our Recovery Time & Downtime Cost Calculator to focus on a handful of simple metrics that might come into play during a downtime event, and start a general analysis of what an outage could mean to your business. The results of this calculator are meant to help estimate loss, and does not calculate actual loss."
+      },
       msp: {
         timeBetweenBackups: 5,
         recoveryProcessingTime: 6,
+      },
+      tooltips: {
+        one: "Systems include, but are not limited to, email, documents, specific business systems (e.g., point of sale, shipping & logistics,databases), etc.?",
+        two: "If disaster strikes, work often stops and any work that does occur often must be redone. How many hours of work are you willing to repeat in a worst case scenario?",
+        three: "In order to give you a correct calculation we need to get an idea of how much data you have in your system across your organization.",
+        four: "What is the timeframe between each of your backups? E.g. every hour, once a day, once a week.",
+        five: "From when disaster strikes, how long does it for your end user to notify you, for you to assess the situation, access your backups, and start the recovery process? Think of this a your reponse time.",
+        six: "Storing your data locally is designed for fast data transfers, however you are at risk if there is a disaster in the office such as fire, floods or theft. Cloud data is stored off-site, such as in a Datto data center, which brings an extra level of availability albeit at a slower speed for full bare metal restores.",
+        seven: "Speed of cloud recovery comes down to the amount of data you are trying to recover and your download speed. Devices with slower connections will take longer to recover.",
+        eight: "Nearly every employee will be impacted by an IT outage and will not be able to perform their job obligations to a certain degree. We recommend including the entire staff in this field.",
+        nine: "Even if the business stops due to an outage and employees are not able to perform some, or all, of their duties, employee wages typically are still paid. We are assuming yours will need to be paid, and this must be included in your cost of downtime calculations.",
+        ten: "All staff come with overhead costs like, gas, electric, rent, etc. Normally, this is about 50% of the average salary.",
+        eleven: "For most businesses, an outage will halt the ability to product and accrue revenue. We are assuming that your revenue will case during an outage, and so annual revenue helps to calculate the average cost of lost revenue during downtime.",
       }
     };
   },
@@ -466,7 +530,7 @@ export default {
       let mspRecoveryTime = parseFloat(this.msp.recoveryProcessingTime);
       let leadTime = parseFloat((this.leadTimeHrs * 60) + this.leadTimeMins);
       let mspDowntime = mspRecoveryTime + leadTime;
-      return mspDowntime;      
+      return mspDowntime;
     },
     parseUserFriendlyTime(timeToParse) {
       let hours = timeToParse / 60;
@@ -541,5 +605,17 @@ section.proposal p.result span {
 
 .small {
   color: #9ba7b5;
+}
+
+.icon {
+  float: left;
+  background: #0b5ed7;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+  margin-right: 10px;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 5px 0;
 }
 </style>
